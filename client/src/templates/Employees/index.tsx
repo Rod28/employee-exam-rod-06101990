@@ -6,6 +6,8 @@ import { PATHS } from '../../routes';
 // Constants
 import { APP_CONFIG } from '../../constants/appConfig';
 import { FAILED_CREATE_EMPLOYEE } from '../../constants/employees';
+// Assets
+import Avatar from '../../assets/images/avatar.webp';
 // Context
 import { useLoading } from '../../context/LoadingProvider/context';
 import { useModal } from '../../context/ModalProvider/context';
@@ -21,7 +23,9 @@ import { sleep } from '../../helpers';
 // Utils
 import { createPaginationEmployees } from './utils';
 // API
-import { getEmployees } from '../../api/employees';
+import { getEmployees, createEmployee } from '../../api/employees';
+// Types
+import { Employee, CreateEmployee } from '../../interfaces/employees';
 
 const Employees = () => {
   // Navigation
@@ -40,13 +44,13 @@ const Employees = () => {
 
   // State
   const [addNewEmployee, setAddNewEmployee] = useState(false);
-  const [employees, setEmployees] = useState<Array<any>>([]);
+  const [employees, setEmployees] = useState<Array<Employee>>([]);
   const [findEmploy, setFindEmploy] = useState('');
   const [page, setPages] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
-  const [paginationEmployees, setPaginationEmployees] = useState<Array<any>>(
-    []
-  );
+  const [paginationEmployees, setPaginationEmployees] = useState<
+    Array<Employee>
+  >([]);
 
   /**
    * Funcion que hace una peticion al API para obtener un listado
@@ -57,7 +61,13 @@ const Employees = () => {
       setLoading(true);
 
       const response = await getEmployees();
-      const items = response?.results || [];
+
+      // Error sintetico al cargar los usuarios
+      if (!response?.success) {
+        throw new Error();
+      }
+
+      const items = response?.data?.employees || [];
       const firtsEmployees = createPaginationEmployees(
         items,
         1,
@@ -87,51 +97,6 @@ const Employees = () => {
   }, [setLoading, openModalGlobal]);
 
   /**
-   * La funcion almacena en el state, el valor actual del campo 'find'.
-   * @param name Nombre del campo
-   * @param value Valor del campo
-   */
-  const handleOnChange = useCallback((name: string, value: string): void => {
-    setFindEmploy(value);
-  }, []);
-
-  /**
-   * Funcionn que regresa a la pagina anterior.
-   * @param value Objeto con el valor del formulario
-   */
-  const handleSubmit = useCallback(
-    (value: { find: string }): void => {
-      const find = employees.find((emp) => {
-        const name = `${emp?.name?.first || ''} ${emp?.name?.last || ''}`;
-        if (name.toLowerCase().includes(value.find.toLowerCase())) {
-          return emp;
-        }
-
-        return undefined;
-      });
-
-      // Error sintetico, usuario no existente
-      if (!find) {
-        openModalGlobal({
-          title: { value: 'modals.emplyNotFound.title' },
-          message: { value: 'modals.emplyNotFound.message' }
-        });
-        return;
-      }
-
-      // Data
-      const name = (find?.name?.first || '').toLowerCase();
-      const lastname = (find?.name?.last || '').toLowerCase();
-      const salt = find?.login?.salt || '';
-      const dynamicUrl = `${PATHS.Employees}/${name}-${lastname}-${salt}`;
-
-      // Navega a una ruta dinamica por busqueda de usuario
-      navigate(dynamicUrl, { state: { isDynamicPath: true, data: find } });
-    },
-    [employees, navigate, openModalGlobal]
-  );
-
-  /**
    * Funcion que se encarga de agregar un nuevo empleado y refrescar la
    * lista actual para poder verlo.
    * @param data Datos del formulario
@@ -142,52 +107,35 @@ const Employees = () => {
         setAddNewEmployee(false);
         setLoading(true);
 
-        // Simula peticion al API
-        await sleep(2000);
-
         // Simula un error al intentar crear un usuario
         if (
           values.name === FAILED_CREATE_EMPLOYEE.Name &&
           values.lastName === FAILED_CREATE_EMPLOYEE.LastName
         ) {
+          // Simula peticion al API
+          await sleep(2000);
+
           // Error sintetico al crear el usuario
           throw new Error();
         }
 
         const birthday = moment(values.dateBirth).format('YYYY/MM/DD');
-        const body = {
+        const body: CreateEmployee = {
           name: values.name,
           last_name: values.lastName,
           birthday
         };
-        console.log('Datos que se mandarian al API: >>', body);
 
-        // Simulasmos que se vuelven a pedir los datos para ver el nuevo registro.
-        const newData = [
-          {
-            name: { first: values.name, last: values.lastName },
-            login: { salt: moment().unix() },
-            picture: {
-              large:
-                'https://img.freepik.com/vector-premium/perfil-avatar-hombre-icono-redondo_24640-14044.jpg?w=2000',
-              medium:
-                'https://img.freepik.com/vector-premium/perfil-avatar-hombre-icono-redondo_24640-14044.jpg?w=2000'
-            },
-            dob: { date: birthday }
-          },
-          ...employees
-        ];
-        const firtsEmployees = createPaginationEmployees(
-          newData,
-          1,
-          Number(APP_CONFIG.ITEMS_PER_PAGE || 0)
-        );
-        setPages(1);
-        setPaginationEmployees(firtsEmployees);
-        setEmployees(newData);
-        setTotalPages(
-          Math.ceil(newData.length / Number(APP_CONFIG.ITEMS_PER_PAGE || 0))
-        );
+        // Creamos el usuario
+        const response = await createEmployee(body);
+
+        // Error sintetico al crear el usuario
+        if (!response?.success) {
+          throw new Error();
+        }
+
+        // Se vuelven a solicitar los nuevos usuarios
+        await doFetchEmployees();
 
         // Nuevo usuario agregado con exito.
         openModalGlobal({
@@ -207,7 +155,52 @@ const Employees = () => {
         setLoading(false);
       }
     },
-    [employees, setLoading, openModalGlobal]
+    [setLoading, doFetchEmployees, openModalGlobal]
+  );
+
+  /**
+   * La funcion almacena en el state, el valor actual del campo 'find'.
+   * @param name Nombre del campo
+   * @param value Valor del campo
+   */
+  const handleOnChange = useCallback((name: string, value: string): void => {
+    setFindEmploy(value);
+  }, []);
+
+  /**
+   * Funcionn que regresa a la pagina anterior.
+   * @param value Objeto con el valor del formulario
+   */
+  const handleSubmit = useCallback(
+    (value: { find: string }): void => {
+      const find = employees.find((emp) => {
+        const name = `${emp?.name || ''} ${emp?.last_name || ''}`;
+        if (name.toLowerCase().includes(value.find.toLowerCase())) {
+          return emp;
+        }
+
+        return undefined;
+      });
+
+      // Error sintetico, usuario no existente
+      if (!find) {
+        openModalGlobal({
+          title: { value: 'modals.emplyNotFound.title' },
+          message: { value: 'modals.emplyNotFound.message' }
+        });
+        return;
+      }
+
+      // Data
+      const name = (find?.name || '').toLowerCase();
+      const lastname = (find?.last_name || '').toLowerCase();
+      const salt = find?.id || '';
+      const dynamicUrl = `${PATHS.Employees}/${name}-${lastname}-${salt}`;
+
+      // Navega a una ruta dinamica por busqueda de usuario
+      navigate(dynamicUrl, { state: { isDynamicPath: true, data: find } });
+    },
+    [employees, navigate, openModalGlobal]
   );
 
   /**
@@ -344,103 +337,89 @@ const Employees = () => {
 
           {/* Table */}
           {!state?.isDynamicPath && (
-            <div className="rounded-lg overflow-hidden bg-gray-lighter">
-              {paginationEmployees.map((employ) => {
-                return (
-                  <button
-                    key={employ?.login?.uuid || `{index}-id`}
-                    className="flex flex-col sm:flex-row justify-start p-4 border-b border-gray-light w-full bg-gray-lighter hover:bg-zinc-400 duration-300 transition-colors"
-                    onClick={() =>
-                      handleSubmit({
-                        find: `${employ?.name?.first || ''} ${
-                          employ?.name?.last || '- - -'
-                        }`
-                      })
-                    }
-                  >
-                    <div className="flex sm:flex-col justify-between sm:w-32 sm:mr-12">
-                      <img
-                        src={employ?.picture?.medium || ''}
-                        alt={employ?.name?.first || 'Avatar'}
-                        width={72}
-                        height={72}
-                        className="rounded-full mr-6 sm:mr-0 mb-6 sm:mb-0"
-                      />
+            <>
+              <Typography
+                title={{
+                  value: 'screens.employees.totalEmployees',
+                  keys: { total: `${employees.length}` }
+                }}
+                weight="bold"
+                color="primary"
+                className="uppercase leading-4 ml-4 sm:ml-6 mb-2"
+              />
+              <div className="rounded-lg overflow-hidden bg-gray-lighter">
+                {paginationEmployees.map((employ) => {
+                  return (
+                    <button
+                      key={`id-${employ.id}`}
+                      className="flex flex-col sm:flex-row items-center justify-start p-4 border-b border-gray-light w-full bg-gray-lighter hover:bg-zinc-400 duration-300 transition-colors"
+                      onClick={() =>
+                        handleSubmit({
+                          find: `${employ?.name || ''} ${
+                            employ?.last_name || '- - -'
+                          }`
+                        })
+                      }
+                    >
+                      <div className="flex sm:flex-col justify-between sm:w-32 sm:mr-12">
+                        <img
+                          src={Avatar}
+                          alt={employ?.name || 'Avatar'}
+                          width={72}
+                          height={72}
+                          className="rounded-full mr-6 sm:mr-0 mb-6 sm:mb-0"
+                        />
 
-                      <div className="mt-4 w-full">
-                        <Typography
-                          title={{ value: 'screens.employees.name' }}
-                          weight="bold"
-                          className="uppercase leading-4"
-                        />
-                        <Typography
-                          title={`${employ?.name?.first || ''} ${
-                            employ?.name?.last || '- - -'
-                          }`}
-                          size="small"
-                        />
-                      </div>
-                    </div>
-
-                    {/* Data */}
-                    <div className="self-stretch flex flex-col xs:flex-row sm:flex-col items-start xs:mb-4 sm:mb-0 justify-between sm:w-1/3 md:w-5/12">
-                      <div className="px-3 mb-4 xs:mb-0 text-left w-1/2 sm:w-auto">
-                        <Typography
-                          title={{ value: 'screens.employees.mail' }}
-                          weight="bold"
-                          className="uppercase leading-4"
-                        />
-                        <Typography
-                          title={employ?.email || '- - -'}
-                          size="small"
-                        />
+                        <div className="mt-4 w-full">
+                          <Typography
+                            title={{ value: 'screens.employees.name' }}
+                            weight="bold"
+                            className="uppercase leading-4"
+                          />
+                          <Typography
+                            title={`${employ?.name || ''}`}
+                            size="small"
+                          />
+                        </div>
                       </div>
 
-                      <div className="px-3 mb-4 xs:mb-0 text-left w-1/2 sm:w-auto">
-                        <Typography
-                          title={{ value: 'screens.employees.cell' }}
-                          weight="bold"
-                          className="uppercase leading-4"
-                        />
-                        <Typography
-                          title={employ?.phone || '- - -'}
-                          size="small"
-                        />
-                      </div>
-                    </div>
-
-                    <div className="self-stretch flex flex-col xs:flex-row sm:flex-col items-start xs:mb-4 sm:mb-0 justify-between sm:w-1/3 md:w-5/12">
-                      <div className="px-3 mb-4 xs:mb-0 text-left w-1/2 sm:w-auto">
-                        <Typography
-                          title={{ value: 'screens.employees.city' }}
-                          weight="bold"
-                          className="uppercase leading-4"
-                        />
-                        <Typography
-                          title={employ?.location?.city || '- - -'}
-                          size="small"
-                        />
+                      {/* Data */}
+                      <div className="self-stretch flex flex-col xs:flex-row xs:mb-4 sm:mb-0 sm:items-center sm:justify-center sm:w-1/3 md:w-5/12">
+                        <div className="px-3 mb-4 xs:mb-0 text-left">
+                          <Typography
+                            title={{ value: 'screens.employees.fullName' }}
+                            weight="bold"
+                            className="uppercase leading-4"
+                          />
+                          <Typography
+                            title={`${employ?.name || ''} ${
+                              employ?.last_name || ''
+                            }`}
+                            size="small"
+                          />
+                        </div>
                       </div>
 
-                      <div className="px-3 text-left w-1/2 sm:w-auto">
-                        <Typography
-                          title={{ value: 'screens.employees.dateBirth' }}
-                          weight="bold"
-                          className="uppercase leading-4"
-                        />
-                        <Typography
-                          title={
-                            moment(employ?.dob?.date).format('DD-MM-yyyy') ||
-                            '- - -'
-                          }
-                          size="small"
-                        />
+                      <div className="self-stretch flex flex-col xs:flex-row xs:mb-4 sm:mb-0 sm:items-center sm:justify-center sm:w-1/3 md:w-5/12">
+                        <div className="px-3 mb-4 xs:mb-0 text-left">
+                          <Typography
+                            title={{ value: 'screens.employees.dateBirth' }}
+                            weight="bold"
+                            className="uppercase leading-4"
+                          />
+                          <Typography
+                            title={moment(employ?.birthday || '- - -').format(
+                              'YYYY/MM/DD'
+                            )}
+                            size="small"
+                          />
+                        </div>
                       </div>
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </>
           )}
         </div>
       </div>

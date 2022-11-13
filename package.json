@@ -1,29 +1,26 @@
 {
-  "name": "server",
-  "version": "1.0.0",
+  "name": "employee-exam-rod-06101990",
+  "version": "0.3.0",
   "private": true,
-  "description": "Middleware",
+  "description": "Prueba con ReactJS para hacer un login y consultas a una url publica.",
   "main": "dist/server.js",
   "author": "Rodrigo Gallegos",
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com/Rod28/template-web-react-js.git"
+    "url": "https://github.com/Rod28/employee-exam-rod-06101990"
   },
   "bugs": {
-    "url": "https://gitlab.com/Rod28/template-web-react-js/issues"
+    "url": "https://github.com/Rod28/employee-exam-rod-06101990/issues"
   },
-  "homepage": "https://gitlab.com/Rod28/template-web-react-js#readme",
+  "homepage": "https://github.com/Rod28/employee-exam-rod-06101990",
   "scripts": {
     "preinstall": "cd client/ && npm i && cd ../",
     "copy-app": "cp -r client/build dist/",
     "build-app": "cd client/ && npm run build && cd ../",
     "clean-up": "rm -rf dist/",
     "build": "npm run clean-up && tsc && npm run build-app && npm run copy-app",
-    "start": "pm2 start ecosystem.config.js",
-    "stop": "pm2 stop ecosystem.config.js",
-    "delete": "pm2 delete ecosystem.config.js",
-    "restart": "pm2 restart ecosystem.config.js",
+    "start": "node dist/server",
     "server": "nodemon",
     "client": "cd client/ && npm start",
     "start:dev": "concurrently 'npm:server' 'npm:client'",

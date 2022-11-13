@@ -12,7 +12,7 @@ export const createPaginationEmployees = (
 ): Array<any> => {
   const emp = [...employees];
   const start = itemsPerPage * (currentPage - 1);
-  const end = itemsPerPage * currentPage - 1;
+  const end = itemsPerPage * currentPage;
   const result = emp.slice(start, end);
 
   return result;

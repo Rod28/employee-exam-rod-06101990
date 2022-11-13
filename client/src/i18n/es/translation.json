@@ -31,12 +31,14 @@
       "title": "Empleados",
       "pages": "Página {{start}} - {{end}}",
       "name": "Nombre:",
+      "fullName": "Nombre completo:",
       "gender": "Género",
       "age": "Edad",
       "antiquity": "Antigüedad",
       "dateAdmission": "Fecha de ingreso",
       "ageData": "{{years}} años",
       "state": "Estado",
+      "street": "Calle",
       "country": "País",
       "postcode": "Código postal",
       "mail": "Correo:",
@@ -45,7 +47,8 @@
       "city": "Ciudad:",
       "currentLocation": "Ubicación actual",
       "personalData": "Información personal",
-      "workData": "Datos de trabajo"
+      "workData": "Datos de trabajo",
+      "totalEmployees": "Totol de empleados: {{total}}"
     },
     "upload": {
       "title": "Cargar",

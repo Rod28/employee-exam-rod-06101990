@@ -4,5 +4,6 @@ const router = express.Router();
 const employees = require('../controllers/employees');
 
 router.get('/list-employees', employees.getDataEmployees);
+router.post('/create-employees', employees.createNewEmployees);
 
 module.exports = router;

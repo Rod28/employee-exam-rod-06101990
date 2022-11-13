@@ -31,12 +31,14 @@
       "title": "Employees",
       "pages": "Page {{start}} - {{end}}",
       "name": "Name:",
+      "fullName": "Full name:",
       "gender": "Gender",
       "age": "Age",
       "antiquity": "Antiquity",
       "dateAdmission": "Date of admission",
       "ageData": "{{years}} years",
       "state": "State",
+      "street": "Street",
       "country": "Country",
       "postcode": "Postcode",
       "mail": "Mail:",
@@ -45,7 +47,8 @@
       "city": "City:",
       "currentLocation": "Current location",
       "personalData": "Personal data",
-      "workData": "Work data"
+      "workData": "Work data",
+      "totalEmployees": "Total employees: {{total}}"
     },
     "upload": {
       "title": "Upload",

@@ -40,18 +40,23 @@ app.use(setCustomHeaders);
 // App's port current
 const PORT = process.env.PORT || 4000;
 
-// Static files
-if (process.env.NODE_ENV === 'production') {
-  // Set static folder
-  app.use(express.static('dist/build'));
-  // Render app
-  app.get('/', (_: Request, res: Response) => {
-    res.sendFile(path.resolve(__dirname, 'dist', 'build', 'index.html'));
-  });
-}
-
 // All API routes
 app.use('/api/employees', require('./src/routes/employees'));
+
+// Static files, only production
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static(path.join(__dirname, 'build')));
+
+  // Render app
+  app.get('/*', (_: Request, res: Response) => {
+    res.sendFile(path.join(__dirname, 'build/index.html'), function (err) {
+      if (err) {
+        res.status(500).send(err);
+      }
+    });
+  });
+}
 
 // Start app
 app.listen(PORT, () => {

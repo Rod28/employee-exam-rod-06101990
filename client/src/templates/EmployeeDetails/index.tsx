@@ -1,8 +1,10 @@
 import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import moment from 'moment';
 // Routes
 import { PATHS } from '../../routes';
-import moment from 'moment';
+// Assets
+import Avatar from '../../assets/images/avatar.webp';
 // Components
 import Typography from '../../components/atoms/Typography';
 
@@ -25,8 +27,8 @@ const EmployeeDetails = () => {
   return (
     <div className="mt-8 mb-24">
       <Typography
-        title={`${state?.data?.name?.first || '- - -'} ${
-          state?.data?.name?.last || '- - -'
+        title={`${state?.data?.name || '- - -'} ${
+          state?.data?.last_name || '- - -'
         }`}
         size="large"
         weight="bold"
@@ -36,8 +38,8 @@ const EmployeeDetails = () => {
 
       <div className="flex flex-col items-center">
         <img
-          src={state?.data?.picture?.large || ''}
-          alt={state?.data?.name?.first || 'Avatar'}
+          src={Avatar}
+          alt={state?.data?.name || 'Avatar'}
           width={128}
           height={128}
           className="rounded-full mr-6 sm:mr-0 mb-6 sm:mb-0"
@@ -100,10 +102,9 @@ const EmployeeDetails = () => {
                   className="leading-4"
                 />
                 <Typography
-                  title={
-                    moment(state?.data?.dob?.date).format('DD-MM-yyyy') ||
-                    '- - -'
-                  }
+                  title={moment(state?.data?.birthday || '- - -').format(
+                    'YYYY/MM/DD'
+                  )}
                   size="small"
                 />
               </div>
@@ -153,7 +154,7 @@ const EmployeeDetails = () => {
 
               <div className=" mb-3">
                 <Typography
-                  title={{ value: 'screens.employees.dateBirth' }}
+                  title={{ value: 'screens.employees.street' }}
                   weight="bold"
                   className="leading-4"
                 />
@@ -239,13 +240,7 @@ const EmployeeDetails = () => {
                 weight="bold"
                 className="leading-4"
               />
-              <Typography
-                title={
-                  moment(state?.data?.registered?.date).format('DD-MM-yyyy') ||
-                  '- - -'
-                }
-                size="small"
-              />
+              <Typography title="- - -" size="small" />
             </div>
           </div>
         </div>
