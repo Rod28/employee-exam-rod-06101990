@@ -1,0 +1,16 @@
+export type Colors =
+  | 'primary'
+  | 'secondary'
+  | 'complementary'
+  | 'black'
+  | 'white'
+  | 'gray-darker'
+  | 'gray-dark'
+  | 'gray'
+  | 'gray-light'
+  | 'gray-lighter'
+  | 'successful'
+  | 'warning'
+  | 'error'
+  | 'alert'
+  | 'info';

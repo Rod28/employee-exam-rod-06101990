@@ -1,0 +1,13 @@
+/*
+  Se importan las hojas de estilo de parciales. Las hojas de estilos
+  con _name (parciales) no se compilan, y no es necesario incluir el
+  "_" al importarlas aqui. Se importan aqui y se van a compilar en .css,
+  generando después el archivo main.css para el navegador.
+  Este archivo es el que sí puede leer el navegador y debe ir en los
+  estilos que carga el html, o en el archivo index.js de React.
+*/
+
+@forward "./modules/normalize";
+@forward "./modules/stencil/container";
+@forward "./modules/stencil/typography";
+@forward "./modules/animations/animations";

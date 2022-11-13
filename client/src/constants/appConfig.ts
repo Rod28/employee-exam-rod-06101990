@@ -1,0 +1,6 @@
+export const APP_CONFIG = {
+  API_URL: process.env.REACT_APP_API_URL || '',
+  TIMEOUT: process.env.REACT_APP_TIMEOUT_AXIOS || 6000,
+  ITEMS_PER_PAGE: process.env.REACT_APP_ITEMS_PER_PAGE || 10,
+  NUMBER_RESULTS: process.env.REACT_APP_NUMBER_RESULTS || 31
+};

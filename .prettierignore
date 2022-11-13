@@ -1,0 +1,24 @@
+# node_modules
+node_modules/
+
+# Client
+client/node_modules/
+client/build/
+client/coverage/
+client/public/
+
+
+# Build
+dist/
+
+# Git
+.husky
+
+# Files
+**/*.css
+**/*.scss
+**/*.sass
+**/*.yml
+**/*.json
+**/*.md
+**/*.html

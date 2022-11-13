@@ -1,0 +1,93 @@
+{
+  "buttons": {
+    "login": "Iniciar sesión",
+    "logout": "Cerrar sesión",
+    "understood": "Entendido",
+    "find": "Buscar",
+    "addEmployee": "Agregar empleado",
+    "continue": "Continuar",
+    "cancel": "Cancelar"
+  },
+  "rules": {
+    "required": "Este campo es obligatorio.",
+    "invalidText": "El campo contiene caracteres no válidos.",
+    "invalidMail": "El correo no es válido.",
+    "invalidMinLenght": "Deben ser mínimo 3 caracteres.",
+    "invalidPhone": "El teléfono debe ser a 10 dígitos."
+  },
+  "inputs": {
+    "user": "Usuario",
+    "password": "Contraseña",
+    "find": "Buscar por nombre",
+    "name": "Nombre",
+    "lastName": "Apellido",
+    "dateBirth": "Fecha de nacimiento"
+  },
+  "screens": {
+    "home": {
+      "title": "Iniciar sesión"
+    },
+    "employees": {
+      "title": "Empleados",
+      "pages": "Página {{start}} - {{end}}",
+      "name": "Nombre:",
+      "gender": "Género",
+      "age": "Edad",
+      "antiquity": "Antigüedad",
+      "dateAdmission": "Fecha de ingreso",
+      "ageData": "{{years}} años",
+      "state": "Estado",
+      "country": "País",
+      "postcode": "Código postal",
+      "mail": "Correo:",
+      "cell": "Teléfono celular:",
+      "dateBirth": "Fecha de nacimiento:",
+      "city": "Ciudad:",
+      "currentLocation": "Ubicación actual",
+      "personalData": "Información personal",
+      "workData": "Datos de trabajo"
+    },
+    "upload": {
+      "title": "Cargar",
+      "upload_title": "Arrasta una imagen para poderla cargar",
+      "preview_title": "Presiona sobre cualquier imagen para tener una vista previa de ella"
+    }
+  },
+  "loaders": {
+    "loading": "Cargando..."
+  },
+  "modals": {
+    "errorLogin": {
+      "title": "Error al iniciar sesion",
+      "message": "Usuario o nontraseña no válidos."
+    },
+    "getEmployees": {
+      "title": "Error al cargar la información",
+      "message": "No pudimos obtener la información, intenta de nuevo más tarde."
+    },
+    "emplyNotFound": {
+      "title": "Empleado no encontrado",
+      "message": "No pudimos obtener información de este empleado, verifica el nombre e intenta nuevamente."
+    },
+    "addedEmployee": {
+      "title": "Empleado agregado",
+      "message": "Se ha creado un nuevo empleado de forma exitosa."
+    },
+    "addedEmployeeError": {
+      "title": "Error al crear el empleado",
+      "message": "Hubo un error al intentar crear el nuevo empleado, intenta nuevamente."
+    },
+    "fileUploadError": {
+      "title": "Archivo inválido",
+      "message": "El tipo de archivo que intentas cargar, no es válido, verifica e intenta de nuevo."
+    },
+    "repeatedFiles": {
+      "title": "Archivo repetido",
+      "message": "Detectamos que el archivo que intentas cargar ya existe, intenta con otro diferente."
+    },
+    "loadSimulation": {
+      "title": "Simulación de carga exitosa",
+      "message": "Se simula la carga de archivos de manera exitosa."
+    }
+  }
+}

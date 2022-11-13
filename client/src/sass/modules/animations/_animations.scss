@@ -1,0 +1,61 @@
+/* ------------------------------------*\
+  # Main
+\*------------------------------------ */
+@use "../m-master" as mt;
+
+// Tiempo de las transiciones y delys de los elementos
+$time-opacity: 750ms;
+$time-positions: 950ms;
+$delay-positions: 50ms;
+
+// Estilos generales para todas las animaciones
+%animation {
+  position: relative;
+  visibility: hidden;
+  opacity: 0;
+}
+
+/* ------------------------------------*\
+  # Fade
+\*------------------------------------ */
+// Muestra un elemento que antes fue oculto, sin mover su posicion.
+.fade-animation {
+  @extend %animation;
+
+  transition: opacity 1200ms ease-in-out;
+
+  &--init {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+// Muestra un elemento desde la parte inferior.
+.get-in-bottom-animation {
+  @extend %animation;
+
+  top: mt.$box-12;
+  transition: opacity $time-opacity, top $time-positions $delay-positions ease;
+
+  &--init {
+    top: 0;
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+// Muestra un elemento desde la parte superior.
+.get-in-top-animation {
+  @extend %animation;
+
+  bottom: mt.$box-12;
+  transition:
+    opacity $time-opacity,
+    bottom $time-positions $delay-positions ease;
+
+  &--init {
+    bottom: 0;
+    visibility: visible;
+    opacity: 1;
+  }
+}

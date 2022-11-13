@@ -1,0 +1,87 @@
+/* ------------------------------------*\
+  # Main
+\*------------------------------------ */
+@use "../../../sass/modules/m-master" as mt;
+@use "../../../sass/modules/mixins/mixin-querys" as mx-q;
+@use "../../../sass/modules/mixins/mixin-utils" as mx-u;
+
+// Duracion de la animacion
+$duration-burger: 400ms;
+$spacing: 360%;
+
+/*
+    El btn-burger ocupa el 100% tanto de alto como de ancho
+    Se debe establecer el tamaño del componente desde el header
+    Este componente tienen un <span> que reprecenta la linea
+    central del boton.
+    Las lineas superio e inferior se hacen con un ::before y ::after.
+*/
+.burger {
+  position: relative;
+  z-index: 1000;
+  width: mt.$box-6;
+  height: mt.$box-6;
+  border-radius: 50%;
+  cursor: pointer;
+
+  /* -------------------------------------*\
+  # Efecto-menu / abrir-cerrar
+  \*------------------------------------ */
+  &__line {
+    position: absolute;
+    top: 50%;
+    left: 57.5%;
+    width: 55%;
+    height: 2px;
+    background: currentcolor;
+    transform: translate(-50%, -50%);
+    transition: background $duration-burger ease-in-out;
+
+    // Linea superior e inferior del btn-burger
+    &::before,
+    &::after {
+      @include mx-u.square(100%);
+
+      content: "";
+      position: absolute;
+      left: -20%;
+      background: currentcolor;
+      transform-origin: left;
+      transition: $duration-burger ease-in-out;
+      transition-property: transform transform-origin;
+    }
+
+    &::before {
+      top: -$spacing;
+      transform: scaleX(0.75) rotate(0deg);
+    }
+
+    &::after {
+      top: $spacing;
+      transform: rotate(0deg);
+    }
+
+    /*
+      Esta clase se activa con el state del heqader, que
+      es pasado el componente por medio de props.
+      Al estar como "true", aplica estas clases.
+    */
+    &--active {
+      background: transparent;
+
+      &::before {
+        transform: translate(27.5%, -90%) scaleX(1) rotate(45deg);
+
+        // transform-origin: center;
+        transition: $duration-burger ease-in-out;
+        transition-property: transform;
+      }
+
+      &::after {
+        transform: translate(27.5%, 90%) rotate(-45deg);
+        transition: $duration-burger ease-in-out;
+        transition-property: transform transform-origin;
+      }
+    }
+  }
+}

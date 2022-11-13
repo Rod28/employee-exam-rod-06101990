@@ -1,0 +1,62 @@
+/* ------------------------------------*\
+    #Lados iguales
+\*------------------------------------ */
+
+/*
+    Permite colocar el width y el height del mismo tamaño.
+*/
+@mixin square($side-square) {
+  width: $side-square;
+  height: $side-square;
+  min-width: $side-square;
+  min-height: $side-square;
+}
+
+/*
+    Permite colocar el padding en el eje "x" y eje "y" del mismo
+    tamaño respectivamente.
+*/
+@mixin pad-x($side-pad-x) {
+  padding-right: $side-pad-x;
+  padding-left: $side-pad-x;
+}
+
+@mixin pad-y($side-pad-y) {
+  padding-top: $side-pad-y;
+  padding-bottom: $side-pad-y;
+}
+
+/*
+    Permite colocar el margin en el eje "x" y eje "y" del mismo
+    tamaño respectivamente.
+*/
+@mixin mar-x($side-mar-x) {
+  margin-right: $side-mar-x;
+  margin-left: $side-mar-x;
+}
+
+@mixin mar-y($side-mar-y) {
+  margin-top: $side-mar-y;
+  margin-bottom: $side-mar-y;
+}
+
+/* ------------------------------------*\
+    #Imagen con relación de aspecto
+\*------------------------------------ */
+
+/*
+    Para mantener el ritmo siempre dentro de las dimensiones, las imgenes
+    debe tener altos establecidos en las variables.
+    Se pasa el alto que se le desea aplicar a la imagen, y se multiplica por
+    un factor que calcula el ancho de la imagen con aspecto de resolución
+    16:9 ó widescreen.
+
+    16:9  = 1.78
+    16:10 = 1.6
+    4:3   = 1.33
+    1:1   = 1
+*/
+@mixin aspect-ratio($img-h, $img-w) {
+  width: $img-h * $img-w;
+  height: $img-h;
+}

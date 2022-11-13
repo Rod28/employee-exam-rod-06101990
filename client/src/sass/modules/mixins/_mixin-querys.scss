@@ -1,0 +1,44 @@
+/* ------------------------------------*\
+  # Meida querys
+\*------------------------------------ */
+@use "../config/variables" as v;
+
+/*
+  Se usa para crear los media querys con una sintaxis más corta.
+  @content es propia de sass y permite incluir contenido dentro del mixin.
+*/
+@mixin xs {
+  @media #{v.$mq-xs} {
+    @content;
+  }
+}
+
+@mixin sm {
+  @media #{v.$mq-sm} {
+    @content;
+  }
+}
+
+@mixin md {
+  @media #{v.$mq-md} {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media #{v.$mq-lg} {
+    @content;
+  }
+}
+
+@mixin xl {
+  @media #{v.$mq-xl} {
+    @content;
+  }
+}
+
+@mixin xx {
+  @media #{v.$mq-xx} {
+    @content;
+  }
+}

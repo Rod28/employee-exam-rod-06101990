@@ -1,0 +1,337 @@
+/* ------------------------------------*\
+  # Text colors
+\*------------------------------------ */
+@use "./variables" as v;
+
+// Colors project
+.text-primary {
+  color: v.$primary;
+}
+
+.text-secondary {
+  color: v.$secondary;
+}
+
+.text-complementary {
+  color: v.$complementary;
+}
+
+// Colors template
+.text-black {
+  color: v.$black;
+}
+
+.text-white {
+  color: v.$white;
+}
+
+.text-gray-darker {
+  color: v.$gray-darker;
+}
+
+.text-gray-dark {
+  color: v.$gray-dark;
+}
+
+.text-gray {
+  color: v.$gray;
+}
+
+.text-gray-light {
+  color: v.$gray-light;
+}
+
+.text-gray-lighter {
+  color: v.$gray-lighter;
+}
+
+.text-successful {
+  color: v.$successful;
+}
+
+.text-warning {
+  color: v.$warning;
+}
+
+.text-error {
+  color: v.$error;
+}
+
+.text-alert {
+  color: v.$alert;
+}
+
+.text-info {
+  color: v.$info;
+}
+
+/* ------------------------------------*\
+  # Background colors
+\*------------------------------------ */
+
+// Colors project
+.bg-primary {
+  background: v.$primary;
+}
+
+.bg-rgba-primary {
+  background: rgba($color: v.$primary, $alpha: 60%);
+}
+
+.bg-secondary {
+  background: v.$secondary;
+}
+
+.bg-rgba-secondary {
+  background: rgba($color: v.$secondary, $alpha: 60%);
+}
+
+.bg-complementary {
+  background: v.$complementary;
+}
+
+.bg-rgba-complementary {
+  background: rgba($color: v.$complementary, $alpha: 60%);
+}
+
+// backgrounds template
+.bg-black {
+  background: v.$black;
+}
+
+.bg-rgba-black {
+  background: rgba($color: v.$black, $alpha: 60%);
+}
+
+.bg-white {
+  background: v.$white;
+}
+
+.bg-rgba-white {
+  background: rgba($color: v.$white, $alpha: 60%);
+}
+
+.bg-gray-darker {
+  background: v.$gray-darker;
+}
+
+.bg-rgba-gray-darker {
+  background: rgba($color: v.$gray-darker, $alpha: 60%);
+}
+
+.bg-gray-dark {
+  background: v.$gray-dark;
+}
+
+.bg-rgba-gray-dark {
+  background: rgba($color: v.$gray-dark, $alpha: 60%);
+}
+
+.bg-gray {
+  background: v.$gray;
+}
+
+.bg-rgba-gray {
+  background: rgba($color: v.$gray, $alpha: 60%);
+}
+
+.bg-gray-light {
+  background: v.$gray-light;
+}
+
+.bg-rgba-gray-light {
+  background: rgba($color: v.$gray-light, $alpha: 60%);
+}
+
+.bg-gray-lighter {
+  background: v.$gray-lighter;
+}
+
+.bg-rgba-gray-lighter {
+  background: rgba($color: v.$gray-lighter, $alpha: 60%);
+}
+
+.bg-successful {
+  background: v.$successful;
+}
+
+.bg-rgba-successful {
+  background: rgba($color: v.$successful, $alpha: 60%);
+}
+
+.bg-warning {
+  background: v.$warning;
+}
+
+.bg-rgba-warning {
+  background: rgba($color: v.$warning, $alpha: 60%);
+}
+
+.bg-error {
+  background: v.$error;
+}
+
+.bg-rgba-error {
+  background: rgba($color: v.$error, $alpha: 60%);
+}
+
+.bg-alert {
+  background: v.$alert;
+}
+
+.bg-rgba-alert {
+  background: rgba($color: v.$alert, $alpha: 60%);
+}
+
+.bg-info {
+  background: v.$info;
+}
+
+.bg-rgba-info {
+  background: rgba($color: v.$info, $alpha: 60%);
+}
+
+/* ------------------------------------*\
+  # Border colors
+\*------------------------------------ */
+
+// Colors project
+.border-primary {
+  border-color: v.$primary;
+}
+
+.border-secondary {
+  border-color: v.$secondary;
+}
+
+.border-complementary {
+  border-color: v.$complementary;
+}
+
+// backgrounds template
+.border-black {
+  border-color: v.$black;
+}
+
+.border-white {
+  border-color: v.$white;
+}
+
+.border-gray-darker {
+  border-color: v.$gray-darker;
+}
+
+.border-gray-dark {
+  border-color: v.$gray-dark;
+}
+
+.border-gray {
+  border-color: v.$gray;
+}
+
+.border-gray-light {
+  border-color: v.$gray-light;
+}
+
+.border-gray-lighter {
+  border-color: v.$gray-lighter;
+}
+
+.border-successful {
+  border-color: v.$successful;
+}
+
+.border-warning {
+  border-color: v.$warning;
+}
+
+.border-error {
+  border-color: v.$error;
+}
+
+.border-alert {
+  border-color: v.$alert;
+}
+
+.border-info {
+  border-color: v.$info;
+}
+
+/* ------------------------------------*\
+  # Border colors
+\*------------------------------------ */
+
+// Colors project
+.fill-primary {
+  fill: v.$primary;
+}
+
+.fill-secondary {
+  fill: v.$secondary;
+}
+
+.fill-complementary {
+  fill: v.$complementary;
+}
+
+// backgrounds template
+.fill-black {
+  fill: v.$black;
+}
+
+.fill-white {
+  fill: v.$white;
+}
+
+.fill-gray-darker {
+  fill: v.$gray-darker;
+}
+
+.fill-gray-dark {
+  fill: v.$gray-dark;
+}
+
+.fill-gray {
+  fill: v.$gray;
+}
+
+.fill-gray-light {
+  fill: v.$gray-light;
+}
+
+.fill-gray-lighter {
+  fill: v.$gray-lighter;
+}
+
+.fill-successful {
+  fill: v.$successful;
+}
+
+.fill-warning {
+  fill: v.$warning;
+}
+
+.fill-error {
+  fill: v.$error;
+}
+
+.fill-alert {
+  fill: v.$alert;
+}
+
+.fill-info {
+  fill: v.$info;
+}
+
+/* ------------------------------------*\
+  # Test element
+\*------------------------------------ */
+
+// Colorea el elemento para poder testear su tamaño y posición
+.test {
+  background: #ff7474;
+}
+
+.test-into {
+  background: #9e74ff;
+}

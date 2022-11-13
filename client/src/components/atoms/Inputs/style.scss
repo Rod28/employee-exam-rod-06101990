@@ -1,0 +1,270 @@
+/* ------------------------------------*\
+  # Main
+\*------------------------------------ */
+@use "../../../sass/modules/m-master" as mt;
+@use "../../../sass/modules/stencil//typography" as tp;
+@use "../../../sass/modules/mixins/mixin-utils" as mx-u;
+
+// Duracion de las animaciones
+$duration: 300ms;
+
+// Espacio para elementos con tipo baseline
+$spacing-baseline: 0;
+
+// Input's height
+$height-input: mt.$box-8;
+
+// Transición para el label cuando está en estado activo
+$transition-active-base: translateY(mt.$box-5 * -1);
+$transition-active-stop: translateY(mt.$box-4 * -1);
+
+%control-form {
+  @include mx-u.pad-x(mt.$box-2);
+
+  width: 100%;
+  height: 100%;
+  font-family: tp.$font-family;
+  font-size: mt.$txt-4;
+  color: mt.$black;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: mt.$edge-md;
+  background: transparent;
+  transition: border-color $duration ease-in;
+  line-height: 1.5em;
+}
+
+.input {
+  margin-top: mt.$box-3;
+
+  &--baseline {
+    margin-top: mt.$box-3;
+  }
+
+  // Estilos para el contenedor del input
+  &__body {
+    position: relative;
+    width: 100%;
+    height: mt.$box-6;
+
+    &--textarea {
+      height: auto;
+      padding-top: 10px;
+    }
+
+    &--outline-textarea {
+      height: auto;
+    }
+
+    &--baseline {
+      height: mt.$box-4;
+    }
+  }
+
+  &__label {
+    &.typography {
+      position: absolute;
+      top: 55%;
+      left: 15px;
+      font-size: mt.$txt-4;
+      transform: translateY(-50%);
+      transition: $duration ease-in;
+      transition-property: transform, left, font-size;
+      line-height: 1.3em;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    &--disabled {
+      &.typography {
+        &:hover {
+          cursor: auto;
+        }
+      }
+    }
+
+    &--has-icon {
+      &.typography {
+        left: mt.$box-6;
+      }
+    }
+
+    &--baseline {
+      &.typography {
+        left: $spacing-baseline;
+      }
+
+      &--has-icon {
+        /* stylelint-disable-next-line max-nesting-depth */
+        &.typography {
+          left: mt.$box-4;
+        }
+      }
+    }
+
+    &--outline-textarea {
+      &.typography {
+        top: 25px;
+      }
+    }
+
+    &--textarea {
+      &.typography {
+        top: 19px;
+      }
+    }
+
+    // Mantiene estos estilos cuando el <input> tiene texto dentro, afecta al <label>
+    &--is-active {
+      &.typography {
+        left: 15px;
+        font-size: mt.$txt-3;
+        transform: $transition-active-base;
+      }
+    }
+
+    &--is-active-stop {
+      &.typography {
+        left: $spacing-baseline;
+        font-size: mt.$txt-3;
+        transform: $transition-active-stop;
+      }
+    }
+  }
+
+  // Estilos para el input
+  &__field {
+    @extend %control-form;
+
+    &:focus + .input {
+      &__label {
+        &.typography {
+          left: 15px;
+          font-size: mt.$txt-3;
+          transform: $transition-active-base;
+        }
+
+        &--stop {
+          /* stylelint-disable-next-line max-nesting-depth */
+          &.typography {
+            left: $spacing-baseline;
+            font-size: mt.$txt-3;
+            transform: $transition-active-stop;
+          }
+        }
+      }
+    }
+
+    &:disabled {
+      color: mt.$gray-light;
+      user-select: none;
+    }
+
+    &--has-icon {
+      padding-left: mt.$box-6;
+    }
+
+    &--has-password {
+      padding-right: mt.$box-6;
+    }
+
+    &--baseline {
+      padding-left: $spacing-baseline;
+      border-top-width: 0;
+      border-right-width: 0;
+      border-left-width: 0;
+      border-radius: 0;
+
+      &--has-icon {
+        padding-left: mt.$box-4;
+      }
+    }
+
+    &--outline-textarea {
+      padding-top: 14px;
+    }
+  }
+
+  &__icon {
+    &.icon {
+      @include mx-u.square(22px);
+
+      position: absolute;
+      top: 50%;
+      left: mt.$box-2;
+      padding: 2px;
+      border-radius: 50%;
+      cursor: pointer;
+      transform: translateY(-50%);
+    }
+
+    .svg {
+      @include mx-u.square(22px);
+    }
+
+    &--disabled {
+      &.icon {
+        cursor: auto;
+      }
+    }
+
+    &--baseline {
+      &.icon {
+        left: $spacing-baseline;
+      }
+    }
+
+    &--outline-textarea {
+      &.icon {
+        top: mt.$box-3;
+      }
+    }
+
+    &--textarea {
+      &.icon {
+        top: mt.$box-2;
+      }
+    }
+  }
+
+  &__eye {
+    @include mx-u.square(32px);
+
+    position: absolute;
+    top: 50%;
+    right: 0;
+    height: 0;
+    padding: 4px;
+    margin-right: mt.$box-base;
+    border-radius: 50%;
+    transform: translateY(-50%);
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__error-message {
+    &.error-message {
+      padding-left: mt.$box-2;
+    }
+
+    &--enabled {
+      min-height: mt.$box-3;
+    }
+
+    &--textarea {
+      &.error-message {
+        margin-top: 0;
+      }
+    }
+
+    &--baseline {
+      &.error-message {
+        padding-left: $spacing-baseline;
+      }
+    }
+  }
+}

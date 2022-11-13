@@ -1,0 +1,23 @@
+/* ------------------------------------*\
+  # Main
+\*------------------------------------ */
+@use "../../../sass/modules/m-master" as mt;
+@use "../../../sass/modules/mixins/mixin-utils" as mx-u;
+
+$timer: 300ms 100ms ease-in-out;
+
+.error-message {
+  visibility: hidden;
+  opacity: 0;
+  overflow: hidden;
+  transition: $timer;
+  transition-property: visibility, opacity;
+
+  // Aminacion para cerrar la caja del mensaje de error
+  &--open {
+    visibility: visible;
+    opacity: 1;
+    transition: $timer;
+    transition-property: visibility, opacity;
+  }
+}

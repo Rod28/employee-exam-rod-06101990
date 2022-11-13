@@ -1,0 +1,103 @@
+/* ------------------------------------*\
+  # Contenedor
+\*------------------------------------ */
+@use "../m-master" as mt;
+@use "../mixins/mixin-querys" as mx-q;
+@use "../mixins/mixin-utils" as mx-u;
+
+/*
+  Padding vertical para los elementos
+*/
+.inside {
+  @include mx-u.pad-y(mt.$box-6);
+
+  @include mx-q.md {
+    @include mx-u.pad-y(mt.$box-12);
+  }
+}
+
+// Centra un elemento
+.center {
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ------------------------------------*\
+  # Contenedor para las imagenes
+\*------------------------------------ */
+
+/*
+  Aplica para toda imagen que tenga un elemento padre con
+  esta clase.
+*/
+.img {
+  display: flex;
+
+  img {
+    width: 100%;
+    height: auto;
+    color: mt.$black;
+    text-align: center;
+    object-fit: cover;
+  }
+}
+
+/* ------------------------------------*\
+  # Main pages container
+\*------------------------------------ */
+.main {
+  position: relative;
+  left: 0;
+
+  @include mx-q.md {
+    &--active-menu {
+      left: mt.$size-menu;
+      transition: left mt.$animation-menu ease-in;
+    }
+
+    &--inactive-menu {
+      left: 0;
+      transition: left mt.$animation-menu 350ms ease-out;
+    }
+  }
+}
+
+/* ------------------------------------*\
+  # Ripple component
+\*------------------------------------ */
+
+.ripple {
+  position: absolute;
+  z-index: 1;
+  border-radius: 50%;
+  transform: scale(0);
+  pointer-events: none;
+
+  &--start {
+    animation: ripple 700ms forwards;
+  }
+}
+
+@keyframes ripple {
+  0% {
+    opacity: 1;
+    transform: scale(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(2);
+  }
+}

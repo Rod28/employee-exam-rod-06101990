@@ -1,0 +1,12 @@
+/* ------------------------------------*\
+    #Background azul en movil
+\*------------------------------------ */
+
+/*
+    En dispositivos moviles al tocar un elemento como <a> o un
+    <button>, estos tienen un fondo azul para indicar que se hace
+    clik en ellos. Con este atributo se elimina eso.
+*/
+@mixin highlight-color {
+  -webkit-tap-highlight-color: rgb(0 0 0 / 0%);
+}

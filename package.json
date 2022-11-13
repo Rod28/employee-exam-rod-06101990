@@ -1,0 +1,65 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Middleware",
+  "main": "dist/server.js",
+  "author": "Rodrigo Gallegos",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/Rod28/template-web-react-js.git"
+  },
+  "bugs": {
+    "url": "https://gitlab.com/Rod28/template-web-react-js/issues"
+  },
+  "homepage": "https://gitlab.com/Rod28/template-web-react-js#readme",
+  "scripts": {
+    "preinstall": "cd client/ && npm i && cd ../",
+    "copy-app": "cp -r client/build dist/",
+    "build-app": "cd client/ && npm run build && cd ../",
+    "clean-up": "rm -rf dist/",
+    "build": "npm run clean-up && tsc && npm run build-app && npm run copy-app",
+    "start": "pm2 start ecosystem.config.js",
+    "stop": "pm2 stop ecosystem.config.js",
+    "delete": "pm2 delete ecosystem.config.js",
+    "restart": "pm2 restart ecosystem.config.js",
+    "server": "nodemon",
+    "client": "cd client/ && npm start",
+    "start:dev": "concurrently 'npm:server' 'npm:client'",
+    "start:local": "export NODE_ENV=production; export ALLOW_ORIGINS=http://localhost:4000; node dist/server",
+    "lint": "eslint --ext .js .",
+    "lint:fix": "eslint --fix --ext .js .",
+    "prettier": "prettier --check .",
+    "prettier:fix": "prettier --write .",
+    "format": "npm run lint:fix && npm run prettier:fix"
+  },
+  "dependencies": {
+    "axios": "^1.1.3",
+    "compression": "^1.7.4",
+    "concurrently": "^7.0.0",
+    "cors": "2.8.5",
+    "dotenv": "^16.0.0",
+    "ejs": "^3.1.7",
+    "express": "^4.18.1",
+    "helmet": "^5.0.2",
+    "html-to-text": "^8.2.0",
+    "juice": "^8.0.0",
+    "nodemailer": "6.7.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.14",
+    "@types/nodemailer": "^6.4.6",
+    "@typescript-eslint/parser": "^5.37.0",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.7.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.3"
+  },
+  "engines": {
+    "node": "16.13.x"
+  }
+}

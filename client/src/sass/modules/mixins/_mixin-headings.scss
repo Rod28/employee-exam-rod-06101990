@@ -1,0 +1,53 @@
+/* ------------------------------------*\
+  # Tamaños de los h1 al h6
+\*------------------------------------ */
+@use "../config/variables" as v;
+
+/*
+  Se estructuran los tamaños, altos de linea y margenes de los
+  elementos h1 al h6.
+*/
+@mixin title-txt-5 {
+  font-size: v.$txt-5;
+  line-height: v.$box-3;
+}
+
+@mixin title-txt-6 {
+  font-size: v.$txt-6;
+  line-height: v.$box-4;
+}
+
+@mixin title-txt-7 {
+  font-size: v.$txt-7;
+  line-height: v.$box-5;
+}
+
+@mixin title-txt-8 {
+  font-size: v.$txt-8;
+  line-height: v.$box-5;
+}
+
+@mixin title-txt-9 {
+  font-size: v.$txt-9;
+  line-height: v.$box-6;
+}
+
+@mixin title-txt-10 {
+  font-size: v.$txt-9;
+  line-height: v.$box-7;
+}
+
+@mixin title-txt-12 {
+  font-size: v.$txt-12;
+  line-height: v.$box-8;
+}
+
+@mixin title-txt-14 {
+  font-size: v.$txt-14;
+  line-height: v.$box-10;
+}
+
+@mixin title-txt-16 {
+  font-size: v.$txt-16;
+  line-height: v.$box-12;
+}

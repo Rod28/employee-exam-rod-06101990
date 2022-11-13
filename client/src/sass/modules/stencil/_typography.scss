@@ -1,0 +1,124 @@
+/* ------------------------------------*\
+  # Margen de parrafos
+\*------------------------------------ */
+@use "../m-master" as mt;
+@use "../mixins//mixin-querys" as mx-q;
+
+@font-face {
+  font-family: Montserrat;
+  font-weight: 400;
+  font-style: normal;
+  src: url("../../../assets/fonts/Montserrat-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Montserrat;
+  font-weight: 500;
+  font-style: normal;
+  src: url("../../../assets/fonts/Montserrat-Medium.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Montserrat;
+  font-weight: 600;
+  font-style: normal;
+  src: url("../../../assets/fonts/Montserrat-SemiBold.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Montserrat;
+  font-weight: 700;
+  font-style: normal;
+  src: url("../../../assets/fonts/Montserrat-Bold.ttf") format("truetype");
+  font-display: swap;
+}
+
+$font-family: "Montserrat", sans-serif;
+
+/*
+  Los elementos <p> y <h1> al <h6> deben ser hijos del elemento
+  que contenga esta clase, para que se aplique a todos por igual.
+  Los margenes en elementos <p>, se aplican siempre en bottom
+  excepto al último elemento.
+*/
+.content {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0 0 mt.$box-base;
+  }
+
+  p:not(:last-child) {
+    margin-bottom: mt.$box-3;
+  }
+}
+
+/* ------------------------------------*\
+  # Sizes
+\*------------------------------------ */
+.font-size-small {
+  font-size: mt.$txt-3;
+}
+
+.font-size-medium {
+  font-size: mt.$txt-5;
+
+  @include mx-q.md {
+    font-size: mt.$txt-6;
+  }
+}
+
+.font-size-large {
+  font-size: mt.$txt-6;
+
+  @include mx-q.md {
+    font-size: mt.$txt-7;
+  }
+}
+
+.font-size-big {
+  font-size: mt.$txt-8;
+
+  @include mx-q.md {
+    font-size: mt.$txt-9;
+  }
+}
+
+/* ------------------------------------*\
+  # Weights
+\*------------------------------------ */
+.font-weight-medium {
+  font-weight: 500;
+}
+
+.font-weight-semi-bold {
+  font-weight: 600;
+}
+
+.font-weight-bold {
+  font-weight: 700;
+}
+
+/* ------------------------------------*\
+  # Align
+\*------------------------------------ */
+.font-align-center {
+  text-align: center;
+}
+
+.font-align-right {
+  text-align: right;
+}
+
+/* ------------------------------------*\
+  # Uppercase
+\*------------------------------------ */
+.uppercase {
+  text-transform: uppercase;
+}

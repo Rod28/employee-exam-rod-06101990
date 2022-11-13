@@ -1,0 +1,93 @@
+{
+  "buttons": {
+    "login": "Login",
+    "logout": "Logout",
+    "understood": "Understood",
+    "find": "Find",
+    "addEmployee": "Add employee",
+    "continue": "Continue",
+    "cancel": "Cancel"
+  },
+  "rules": {
+    "required": "This field is required.",
+    "invalidText": "The field contains invalid characters.",
+    "invalidMail": "The email is not valid.",
+    "invalidMinLenght": "Must be at least 3 characters.",
+    "invalidPhone": "The phone must be 10 digits."
+  },
+  "inputs": {
+    "user": "User",
+    "password": "Password",
+    "find": "Search by name",
+    "name": "Name",
+    "lastName": "Last name",
+    "dateBirth": "Date of birth"
+  },
+  "screens": {
+    "home": {
+      "title": "Login"
+    },
+    "employees": {
+      "title": "Employees",
+      "pages": "Page {{start}} - {{end}}",
+      "name": "Name:",
+      "gender": "Gender",
+      "age": "Age",
+      "antiquity": "Antiquity",
+      "dateAdmission": "Date of admission",
+      "ageData": "{{years}} years",
+      "state": "State",
+      "country": "Country",
+      "postcode": "Postcode",
+      "mail": "Mail:",
+      "cell": "Cell phone:",
+      "dateBirth": "Date of birth:",
+      "city": "City:",
+      "currentLocation": "Current location",
+      "personalData": "Personal data",
+      "workData": "Work data"
+    },
+    "upload": {
+      "title": "Upload",
+      "upload_title": "Drag an image to load it",
+      "preview_title": "Click on any image to preview it"
+    }
+  },
+  "loaders": {
+    "loading": "Loading..."
+  },
+  "modals": {
+    "errorLogin": {
+      "title": "Failed to login",
+      "message": "Invalid username or password."
+    },
+    "getEmployees": {
+      "title": "Error loading information",
+      "message": "We couldn't get the information, please try again later."
+    },
+    "emplyNotFound": {
+      "title": "Employee not found",
+      "message": "We were unable to retrieve information for this employee, please check the name and try again."
+    },
+    "addedEmployee": {
+      "title": "Added employee",
+      "message": "A new employee has been created successfully."
+    },
+    "addedEmployeeError": {
+      "title": "Error creating employee",
+      "message": "There was an error trying to create the new employee, please try again."
+    },
+    "fileUploadError": {
+      "title": "Invalid file",
+      "message": "The type of file you are trying to upload is not valid, please check and try again."
+    },
+    "repeatedFiles": {
+      "title": "Repeated file",
+      "message": "We detected that the file you are trying to upload already exists, try a different one."
+    },
+    "loadSimulation": {
+      "title": "Successful load simulation",
+      "message": "Successful file upload is simulated."
+    }
+  }
+}

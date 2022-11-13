@@ -1,0 +1,21 @@
+/* ------------------------------------*\
+  # Main
+\*------------------------------------ */
+@use "../../../sass/modules/m-master" as mt;
+@use "../../../sass/modules/mixins/mixin-querys" as mx-q;
+@use "../../../sass/modules/mixins/mixin-utils" as mx-u;
+
+.fallback {
+  @include mx-u.pad-y(mt.$box-4);
+
+  &--full {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  @include mx-q.md {
+    @include mx-u.pad-y(mt.$box-6);
+  }
+}

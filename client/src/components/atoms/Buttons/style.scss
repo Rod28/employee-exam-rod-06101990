@@ -1,0 +1,147 @@
+/* ------------------------------------*\
+  # Main
+\*------------------------------------ */
+@use "../../../sass/modules/m-master" as mt;
+@use "../../../sass/modules/stencil//typography" as tp;
+@use "../../../sass/modules/mixins/mixin-querys" as mx-q;
+@use "../../../sass/modules/mixins/mixin-utils" as mx-u;
+
+.button {
+  @include mx-u.pad-x(mt.$box-4);
+
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-family: tp.$font-family;
+  font-weight: 700;
+  font-size: mt.$txt-4;
+  color: mt.$white;
+  border-width: 2px;
+  border-style: solid;
+  overflow: hidden;
+  cursor: pointer;
+  transition: 250ms ease-in-out;
+  transition-property: background, color, transform, box-shadow, border-color;
+  line-height: 1.5em;
+
+  &:hover,
+  &:focus,
+  &:active {
+    box-shadow: 2px 2px 10px mt.$gray-darker;
+  }
+
+  &:disabled {
+    cursor: auto;
+    box-shadow: none;
+  }
+
+  /* ------------------------------------*\
+    # Composición de botones
+  \*------------------------------------ */
+
+  // Sizes
+  &--small {
+    padding-top: 12px;
+    padding-bottom: mt.$box-base;
+  }
+
+  &--big {
+    width: 100%;
+    max-width: mt.$box-36;
+    padding-top: 20px;
+    padding-bottom: mt.$box-2;
+  }
+
+  // Shapes
+  &--edges {
+    border-radius: mt.$edge-md;
+  }
+
+  &--dragee {
+    border-radius: mt.$edge-xx;
+  }
+
+  &--outline {
+    background: transparent;
+  }
+
+  &--text {
+    border-width: 0;
+    background: transparent;
+  }
+
+  // Estilos para el boton con texto e icono
+  &__has-icon {
+    &.icon {
+      @include mx-u.square(mt.$box-2);
+    }
+
+    &--left {
+      &.icon {
+        margin-right: mt.$box-2;
+      }
+    }
+
+    &--right {
+      &.icon {
+        margin-left: mt.$box-2;
+      }
+    }
+  }
+
+  // Estilos para botones con iconos
+  &__icon {
+    &.icon {
+      @include mx-u.square(mt.$box-6);
+
+      padding: 0.6em;
+      border-radius: 50%;
+    }
+
+    .svg {
+      @include mx-u.square(mt.$box-6);
+    }
+
+    &--disabled {
+      &.icon {
+        &:hover,
+        &:focus,
+        &:active {
+          cursor: auto;
+          box-shadow: none;
+        }
+      }
+    }
+
+    &--box {
+      &.icon {
+        border-radius: mt.$edge-sm;
+      }
+    }
+
+    &--small {
+      &.icon {
+        @include mx-u.square(mt.$box-4);
+
+        padding: 10px;
+      }
+
+      .svg {
+        @include mx-u.square(mt.$box-3);
+      }
+    }
+
+    &--big {
+      &.icon {
+        @include mx-u.square(mt.$box-8);
+
+        padding: 0.8em;
+      }
+
+      .svg {
+        @include mx-u.square(mt.$box-7);
+      }
+    }
+  }
+}

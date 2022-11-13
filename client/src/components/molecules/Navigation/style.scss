@@ -1,0 +1,192 @@
+/* ------------------------------------*\
+  # Main
+\*------------------------------------ */
+@use "../../../sass/modules/m-master" as mt;
+@use "../../../sass/modules/mixins/mixin-querys" as mx-q;
+
+$time-letf: 450ms;
+$time-opacity: 300ms;
+$time-letf-mobile: 300ms;
+$time-opacity-mobile: 200ms;
+
+.navigation {
+  position: relative;
+  bottom: calc(mt.$box-9 * -1);
+  z-index: 300;
+  text-align: center;
+  visibility: hidden;
+  opacity: 0;
+
+  &--active-1 {
+    bottom: 0;
+    visibility: visible;
+    opacity: 1;
+    transition:
+      bottom $time-letf 150ms ease-in,
+      opacity $time-opacity 350ms ease-in;
+  }
+
+  &--inactive-1 {
+    bottom: calc(mt.$box-9 * -1);
+    visibility: hidden;
+    opacity: 0;
+    transition:
+      visibility $time-letf-mobile 0ms ease-out,
+      bottom $time-letf-mobile 0ms ease-out,
+      opacity $time-opacity-mobile 50ms ease-out;
+  }
+
+  &--active-2 {
+    bottom: 0;
+    visibility: visible;
+    opacity: 1;
+    transition:
+      bottom $time-letf 250ms ease-in,
+      opacity $time-opacity 450ms ease-in;
+  }
+
+  &--inactive-2 {
+    bottom: calc(mt.$box-9 * -1);
+    visibility: hidden;
+    opacity: 0;
+    transition:
+      visibility $time-letf-mobile 100ms ease-out,
+      bottom $time-letf-mobile 100ms ease-out,
+      opacity $time-opacity-mobile 150ms ease-out;
+  }
+
+  &--active-3 {
+    bottom: 0;
+    visibility: visible;
+    opacity: 1;
+    transition:
+      bottom $time-letf 350ms ease-in,
+      opacity $time-opacity 550ms ease-in;
+  }
+
+  &--inactive-3 {
+    bottom: calc(mt.$box-9 * -1);
+    visibility: hidden;
+    opacity: 0;
+    transition:
+      visibility $time-letf-mobile 200ms ease-out,
+      bottom $time-letf-mobile 200ms ease-out,
+      opacity $time-opacity-mobile 250ms ease-out;
+  }
+
+  &--active-4 {
+    bottom: 0;
+    visibility: visible;
+    opacity: 1;
+    transition:
+      bottom $time-letf 450ms ease-in,
+      opacity $time-opacity 650ms ease-in;
+  }
+
+  &--inactive-4 {
+    bottom: calc(mt.$box-9 * -1);
+    visibility: hidden;
+    opacity: 0;
+    transition:
+      visibility $time-letf-mobile 300ms ease-out,
+      bottom $time-letf-mobile 300ms ease-out,
+      opacity $time-opacity-mobile 350ms ease-out;
+  }
+
+  &__link {
+    width: 100%;
+    margin: mt.$box-3 0;
+    font-weight: 600;
+    font-size: mt.$txt-5;
+    text-align: center;
+    transition: color 350ms ease-in-out;
+
+    &--small {
+      width: mt.$box-24;
+      transition: 250ms ease-in-out;
+      transition-property: background, color, transform, box-shadow, border-color;
+    }
+
+    @include mx-q.md {
+      width: auto;
+      margin: mt.$box-2 0;
+      text-align: left;
+    }
+  }
+
+  &__link-hover {
+    @include mx-q.md {
+      &:hover,
+      &:focus {
+        color: rgba($color: mt.$primary, $alpha: 60%);
+      }
+    }
+  }
+
+  @include mx-q.md {
+    bottom: 0;
+    left: calc(mt.$box-8 * -1);
+    text-align: left;
+
+    &:not(:last-child) {
+      margin-bottom: mt.$box-2;
+    }
+
+    &--active-1 {
+      left: 0;
+      visibility: visible;
+      opacity: 1;
+      transition:
+        left $time-letf 150ms ease-in,
+        opacity $time-opacity 350ms ease-in;
+    }
+
+    &--inactive-1 {
+      left: calc(mt.$box-8 * -1);
+      visibility: hidden;
+      opacity: 0;
+      transition:
+        visibility $time-letf 50ms ease-out,
+        left $time-letf 50ms ease-out,
+        opacity $time-opacity 100ms ease-out;
+    }
+
+    &--active-2 {
+      left: 0;
+      visibility: visible;
+      opacity: 1;
+      transition:
+        left $time-letf 250ms ease-in,
+        opacity $time-opacity 450ms ease-in;
+    }
+
+    &--inactive-2 {
+      left: calc(mt.$box-8 * -1);
+      visibility: hidden;
+      opacity: 0;
+      transition:
+        visibility $time-letf 150ms ease-out,
+        left $time-letf 150ms ease-out,
+        opacity $time-opacity 200ms ease-out;
+    }
+
+    &--active-3 {
+      left: 0;
+      visibility: visible;
+      opacity: 1;
+      transition:
+        left $time-letf 350ms ease-in,
+        opacity $time-opacity 550ms ease-in;
+    }
+
+    &--inactive-3 {
+      left: calc(mt.$box-8 * -1);
+      visibility: hidden;
+      opacity: 0;
+      transition:
+        visibility $time-letf 250ms ease-out,
+        left $time-letf 250ms ease-out,
+        opacity $time-opacity 300ms ease-out;
+    }
+  }
+}

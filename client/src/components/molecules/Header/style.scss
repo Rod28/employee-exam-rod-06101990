@@ -1,0 +1,179 @@
+/* stylelint-disable scss/dollar-variable-pattern */
+
+/* ------------------------------------*\
+  # Main
+\*------------------------------------ */
+@use "../../../sass/modules/m-master" as mt;
+@use "../../../sass/modules/mixins/mixin-querys" as mx-q;
+@use "../../../sass/modules/mixins/mixin-utils" as mx-u;
+
+$animation_menu-mobile: 500ms;
+$delay-animation_menu-mobile: 450ms;
+
+.header {
+  @include mx-u.pad-y(mt.$box-2);
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  padding-left: mt.$box-base;
+
+  &__backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    visibility: hidden;
+    opacity: 0;
+    background: rgba($color: mt.$black, $alpha: 40%);
+
+    &--active {
+      visibility: visible;
+      opacity: 1;
+      transition: 250ms 250ms ease-in;
+      transition-property: visibility opacity;
+    }
+
+    &--inactive {
+      visibility: hidden;
+      opacity: 0;
+      transition: 250ms 550ms ease-out;
+      transition-property: visibility opacity;
+    }
+
+    @include mx-q.md {
+      display: block;
+    }
+  }
+
+  &__button-burger {
+    &.burger {
+      visibility: hidden;
+      opacity: 0;
+      background: mt.$black;
+      animation: button-burger-animation 800ms 500ms forwards;
+    }
+
+    &--active {
+      &.burger {
+        background: transparent;
+        transition: background 300ms ease-in;
+      }
+    }
+
+    &--inactive {
+      &.burger {
+        background: mt.$black;
+        transition: background 300ms $delay-animation_menu-mobile ease-out;
+      }
+    }
+  }
+
+  &__menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100vw;
+    height: 100%;
+    transform-origin: top left;
+    transform: scale(0);
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 200;
+      display: block;
+      width: 200vw;
+      height: 200vw;
+      border-radius: 50%;
+      background: mt.$gray-light;
+      transform: translate(-50%, -50%) scale(0);
+    }
+
+    &--active {
+      transform: scale(1);
+
+      &::before {
+        transform: translate(-50%, -50%) scale(3);
+        transition: transform $animation_menu-mobile ease-in;
+      }
+    }
+
+    &--inactive {
+      transform: scale(0);
+      transition: transform $animation_menu-mobile 500ms ease-out;
+
+      &::before {
+        transform: translate(-50%, -50%) scale(0);
+        transition:
+          transform $animation_menu-mobile $delay-animation_menu-mobile
+          ease-out;
+      }
+    }
+
+    @include mx-q.md {
+      width: mt.$size-menu;
+      background: mt.$gray-light;
+      transform: scaleX(0);
+
+      &::before {
+        display: none;
+      }
+
+      &--active {
+        transform: scaleX(1);
+        transition: transform mt.$animation-menu ease-in;
+      }
+
+      &--inactive {
+        transform: scaleX(0);
+        transition:
+          transform mt.$animation-menu mt.$delay-animation-close-menu
+          ease-out;
+      }
+    }
+  }
+
+  &__navigation {
+    height: 100%;
+    padding-top: mt.$box-14;
+
+    @include mx-q.md {
+      height: 100vh;
+      padding: mt.$box-10 mt.$box-4 mt.$box-4;
+      background: mt.$gray-light;
+    }
+  }
+
+  /* ------------------------------------*\
+    # Querys
+  \*------------------------------------ */
+  @include mx-q.md {
+    display: grid;
+    justify-content: center;
+    width: mt.$box-9;
+    padding-left: 0;
+  }
+}
+
+/* ------------------------------------*\
+  # Animations
+\*------------------------------------ */
+@keyframes button-burger-animation {
+  from {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  to {
+    visibility: visible;
+    opacity: 1;
+  }
+}

@@ -1,0 +1,231 @@
+/* ------------------------------------*\
+  # Main
+\*------------------------------------ */
+@use "../../../sass/modules/m-master" as mt;
+@use "../../../sass/modules/mixins/mixin-utils" as mx-u;
+
+// Tamaño normal del spinner
+$width-spinner: 1.5em;
+$height-spinner: $width-spinner * 3.5;
+$height-spinner-motion: $height-spinner * 2;
+
+// Tamaño pequeño del spinner
+$width-spinner-small: 0.5em;
+$height-spinner-small: $width-spinner-small * 3.5;
+$height-spinner-small-motion: $height-spinner-small * 2;
+
+// Tamaño únicamente para spinner 'core'
+$size-spinner-core: mt.$box-12;
+$size-spinner-core-width: $size-spinner-core * 0.1;
+$size-spinner-core-middle: $size-spinner-core - $size-spinner-core * 0.22;
+$size-spinner-core-center: $size-spinner-core - $size-spinner-core * 0.44;
+
+%size-spinner {
+  width: $width-spinner;
+  height: $height-spinner;
+}
+
+%size-spinner-small {
+  width: $width-spinner-small;
+  height: $height-spinner-small;
+}
+
+%wrapper-core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.loader {
+  position: relative;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: $height-spinner;
+
+  &--small {
+    height: $height-spinner-small;
+  }
+
+  /* ------------------------------------*\
+    # STYLES BARS
+  \*------------------------------------ */
+  &__spinner-bars {
+    @extend %size-spinner;
+
+    position: relative;
+    font-size: mt.$txt-2;
+    animation: loading-bars 1000ms -160ms infinite ease-in-out;
+
+    &::before,
+    &::after {
+      @extend %size-spinner;
+
+      content: "";
+      position: absolute;
+      top: 50%;
+      background: inherit;
+      transform: translateY(-50%);
+      animation: loading-bars 1000ms infinite ease-in-out;
+    }
+
+    &::before {
+      left: -175%;
+      animation-delay: -320ms;
+    }
+
+    &::after {
+      left: 175%;
+    }
+
+    &--small {
+      @extend %size-spinner-small;
+
+      animation: loading-bars-small 1000ms -160ms infinite ease-in-out;
+
+      &::before,
+      &::after {
+        @extend %size-spinner-small;
+
+        animation: loading-bars-small 1000ms infinite ease-in-out;
+      }
+
+      &::before {
+        animation-delay: -320ms;
+      }
+    }
+  }
+
+  /* ------------------------------------*\
+    # STYLES RING
+  \*------------------------------------ */
+  &__spinner-ring {
+    @include mx-u.square($height-spinner);
+
+    position: relative;
+    border: solid 0.4em rgb(0 0 0 / 20%);
+    border-right-color: inherit;
+    border-bottom-color: inherit;
+    border-radius: 50%;
+    box-sizing: border-box;
+    animation: loading-rotate 800ms infinite linear;
+
+    &--small {
+      @include mx-u.square($height-spinner-small);
+
+      border-width: 0.2em;
+    }
+  }
+}
+
+/* ------------------------------------*\
+  # STYLES CORE
+\*------------------------------------ */
+.loader-core {
+  position: relative;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: $size-spinner-core;
+
+  &__wrapper {
+    @include mx-u.square($size-spinner-core);
+  }
+
+  &__spinner-outer {
+    @extend %wrapper-core;
+    @include mx-u.square($size-spinner-core);
+
+    &__spin {
+      @include mx-u.square(100%);
+
+      border: solid $size-spinner-core-width transparent;
+      border-right-color: inherit;
+      border-bottom-color: inherit;
+      border-radius: 50%;
+      box-sizing: border-box;
+      animation: loading-rotate 1000ms infinite linear;
+    }
+  }
+
+  &__spinner-middle {
+    @extend %wrapper-core;
+    @include mx-u.square($size-spinner-core-middle);
+
+    &__spin {
+      @include mx-u.square(100%);
+
+      border: solid $size-spinner-core-width transparent;
+      border-right-color: inherit;
+      border-bottom-color: inherit;
+      border-radius: 50%;
+      box-sizing: border-box;
+      animation: loading-rotate-reverse 800ms infinite linear;
+
+      &--right {
+        animation: loading-rotate 800ms infinite linear;
+      }
+    }
+  }
+
+  &__spinner-center {
+    @extend %wrapper-core;
+    @include mx-u.square($size-spinner-core-center);
+
+    &__spin {
+      @include mx-u.square(100%);
+
+      border: solid $size-spinner-core-width transparent;
+      border-right-color: inherit;
+      border-bottom-color: inherit;
+      border-radius: 50%;
+      box-sizing: border-box;
+      animation: loading-rotate 900ms infinite linear;
+    }
+  }
+}
+
+/* ------------------------------------*\
+  # ANIMATIONS
+\*------------------------------------ */
+
+// BARS
+@keyframes loading-bars {
+  0%,
+  80%,
+  100% {
+    height: $height-spinner;
+  }
+
+  40% {
+    height: $height-spinner-motion;
+  }
+}
+
+@keyframes loading-bars-small {
+  0%,
+  80%,
+  100% {
+    height: $height-spinner-small;
+  }
+
+  40% {
+    height: $height-spinner-small-motion;
+  }
+}
+
+// CORE
+@keyframes loading-rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes loading-rotate-reverse {
+  100% {
+    transform: rotate(-360deg);
+  }
+}

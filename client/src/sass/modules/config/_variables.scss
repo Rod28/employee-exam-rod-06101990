@@ -1,0 +1,152 @@
+/* -----------------------------------*\
+  # Colors
+\*----------------------------------- */
+
+// COLORS
+
+/* PROYECT */
+$primary: #024881;
+$secondary: #152533;
+$complementary: #dcdde1;
+
+/* TEMPLATE */
+$black: #1f2020;
+$white: #f8f8f8;
+$gray-darker: #202020;
+$gray-dark: #2f3640;
+$gray: #535c68;
+$gray-light: #939ba5;
+$gray-lighter: #bdc3c7;
+
+/* STATES */
+$successful: #0c0;
+$warning: #da8908;
+$error: #c0392b;
+$alert: #8e44ad;
+$info: #2980b9;
+
+/* GRID */
+$grill: #f59794;
+$grill-column: #dac2c2;
+$grill-margin-column: #e0a1a3;
+
+/* SREEN_DETECTER */
+$color-base: #942ba8;
+$color-xs: #942800;
+$color-sm: #003976;
+$color-md: #006351;
+$color-lg: #c00f35;
+$color-xl: #004d1a;
+$color-xx: #3742fa;
+
+// END COLORS
+
+/* ------------------------------------*\
+  # Sizes
+\*------------------------------------ */
+
+// Tamaño de letra base del proyecto
+$font-project: 16px;
+
+/*
+  Estos tamaños únicamente deben ser usados en tamaños de fuente.
+  .......
+  Estos tamaños se deben ajustar al modificar el tamaño de letra
+  base del proyecto, ya que las medidas que están en color gris
+  no van a corresponder con las reales si se llegan a cambiar.
+*/
+
+// Tamaños de los textos
+$txt-base: calc($font-project / 4); //  4px   BASE
+$txt-2: calc($txt-base * 2); //  8px
+$txt-3: calc($txt-base * 3); //  12px
+$txt-4: 16px; //  14px     ESTANDAR
+$txt-5: calc($txt-base * 4); //  16px
+$txt-6: calc($txt-base * 5); //  20px
+$txt-7: calc($txt-base * 6); //  24px
+$txt-8: calc($txt-base * 7); //  28px
+$txt-9: calc($txt-base * 8); //  32px
+$txt-10: calc($txt-base * 9); //  36px
+$txt-12: calc($txt-base * 10); //  40px
+$txt-14: calc($txt-base * 12); //  48px
+$txt-16: calc($txt-base * 14); //  56px
+$txt-16: calc($txt-base * 16); //  64px
+
+/*
+  Estos tamaños nunca deben ser usados en tamaños de fuente.
+  .......
+  Estos tamaños se deben ajustar al modificar el tamaño de letra
+  base del proyecto, ya que las medidas que están en color gris
+  no van a corresponder con las reales si se llegan a cambiar.
+*/
+
+// Tamaños de cajas
+$box-base: 8px; // BASE
+$box-2: calc($box-base * 2); //  16px
+$box-3: calc($box-base * 3); //  24px
+$box-4: calc($box-base * 4); //  32px   ESTANDAR
+$box-5: calc($box-base * 5); //  40px
+$box-6: calc($box-base * 6); //  48px
+$box-7: calc($box-base * 7); //  56px
+$box-8: calc($box-base * 8); //  64px
+$box-9: calc($box-base * 9); //  72px
+
+$box-10: calc($box-base * 10); //  80px
+$box-12: calc($box-base * 12); //  96px
+$box-14: calc($box-base * 14); //  112px
+$box-16: calc($box-base * 16); //  128px
+$box-18: calc($box-base * 18); //  144px
+
+$box-20: calc($box-base * 20); //  160px
+$box-22: calc($box-base * 22); //  176px
+$box-24: calc($box-base * 24); //  192px
+$box-26: calc($box-base * 26); //  208px
+$box-28: calc($box-base * 28); //  224px
+
+$box-32: calc($box-base * 32); //  256px
+$box-36: calc($box-base * 36); //  288px
+
+$box-40: calc($box-base * 40); //  320px
+$box-48: calc($box-base * 48); //  384px
+
+$box-56: calc($box-base * 56); //  448px
+$box-64: calc($box-base * 64); //  512px
+
+$box-70: calc($box-base * 70); //  560px
+$box-86: calc($box-base * 86); //  688px
+$box-98: calc($box-base * 98); //  784px
+
+/* ------------------------------------*\
+  # Edges
+\*------------------------------------ */
+$edge-sm: 0.25em;
+$edge-md: 0.75em;
+$edge-lg: 1.5em;
+$edge-xx: 2.5em;
+
+/* ------------------------------------*\
+  # Screen sizes
+\*------------------------------------ */
+$xs: 350px;
+$sm: 600px;
+$md: 905px;
+$lg: 1280px;
+$xl: 1440px;
+$xx: 1920px;
+
+/* ------------------------------------*\
+  # Querys
+\*------------------------------------ */
+$mq-xs: "screen and (min-width: #{$xs})";
+$mq-sm: "screen and (min-width: #{$sm})";
+$mq-md: "screen and (min-width: #{$md})";
+$mq-lg: "screen and (min-width: #{$lg})";
+$mq-xl: "screen and (min-width: #{$xl})";
+$mq-xx: "screen and (min-width: #{$xx})";
+
+// Tiempo de la animacion para abrir y cerrar el menu
+$animation-menu: 350ms;
+$delay-animation-close-menu: 400ms;
+
+// Tamaño del menu para desktop
+$size-menu: $box-32;

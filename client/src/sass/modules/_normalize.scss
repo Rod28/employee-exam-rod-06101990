@@ -1,0 +1,150 @@
+@use "./m-master" as mt;
+@use "./stencil//typography" as tp;
+@use "./mixins/mixin-base" as mx-b;
+@use "./mixins/mixin-utils" as mx-u;
+
+html {
+  font-family: tp.$font-family;
+  font-size: mt.$font-project;
+  color: mt.$black;
+  box-sizing: border-box;
+  background: mt.$complementary;
+}
+
+* {
+  @include mx-b.highlight-color;
+
+  outline: none;
+  box-sizing: border-box;
+
+  &::before,
+  &::after {
+    box-sizing: border-box;
+  }
+}
+
+body {
+  width: 100%;
+  margin: 0;
+}
+
+main {
+  display: block;
+}
+
+figure {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-family: tp.$font-family;
+  font-weight: 700;
+}
+
+span {
+  display: block;
+}
+
+p {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+a {
+  display: inline-block;
+  text-decoration: none;
+}
+
+label {
+  display: inline-block;
+  font-size: mt.$txt-4;
+}
+
+button {
+  padding: 0;
+  border: 1px solid transparent;
+  background: transparent;
+
+  // Elimina la linea punteada en Firefox
+  &::-moz-focus-inner {
+    border: 0;
+  }
+}
+
+// Evita que aparezca la fecha por defecto del navegador
+select {
+  appearance: none;
+}
+
+textarea {
+  padding: 0;
+  resize: none;
+}
+
+input {
+  padding: 0;
+}
+
+// Elimina la linea punteada en Firefox de los inputs
+input::-moz-focus-inner {
+  border: 0;
+}
+
+// Elimina los botones de flechas en input number - Chrome
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+}
+
+// Elimina el color de fondo por defecto del autoComplete - Chrome
+input:-webkit-autofill {
+  background-clip: text;
+}
+
+// Elimina los botones de flechas en input number - Firefox
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+// Elimina las fechas para cambiar la fecha en Chrome
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 24 24"><path fill="%23bbbbbb" d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"/></svg>');
+  transition: background-image 250ms ease-in-out;
+}
+
+// Estilo de la fecha de despliegue en input date - Chrome
+input[type="date"]:hover::-webkit-calendar-picker-indicator,
+input[type="date"]:focus::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 24 24"><path fill="%23024881" d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"/></svg>');
+}
+
+fieldset {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+legend {
+  width: 100%;
+  padding: 0;
+  font-size: mt.$txt-4;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}

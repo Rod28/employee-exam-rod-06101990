@@ -1,0 +1,12 @@
+/* ------------------------------------*\
+  # Main
+\*------------------------------------ */
+@use "../../../sass/modules/m-master" as mt;
+
+/*
+  Aplica para el componente Icon, centra mediante
+  flex al icono dentro de su caja padre.
+*/
+.svg {
+  transition: fill 300ms ease-in-out;
+}
