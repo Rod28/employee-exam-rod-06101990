@@ -1,4 +1,5 @@
 import {
+  useRef,
   useState,
   useCallback,
   useEffect,
@@ -10,6 +11,7 @@ import { useModal } from '../../../context/ModalProvider/context';
 // Components
 import Icon from '../../../components/atoms/Icon';
 import Typography from '../../../components/atoms/Typography';
+import ImagePreview from '../../../components/molecules/ImagePreview';
 // Types
 import { DragDropFileProps, FileList } from './types';
 
@@ -23,9 +25,12 @@ const DragDropFile = ({
     actions: { openModalGlobal }
   } = useModal();
 
+  const inputRef = useRef<HTMLInputElement>(null);
+
   // States
   const [files, setFiles] = useState<Array<FileList>>([]);
   const [currentId, setCurrentId] = useState('');
+  const [openPreview, setOpenPreview] = useState(false);
 
   /**
    * Funcion que se llama cada vez que se intenta cargar un nuevo archivo
@@ -37,6 +42,11 @@ const DragDropFile = ({
     (e: ChangeEvent<HTMLInputElement>, currentFiles: Array<FileList>): void => {
       const fls = e.target?.files;
       const newFile = fls ? fls[0] : undefined;
+
+      // Limpiamos el valor del input para poder leer la misma imagen si se carga.
+      if (inputRef.current) {
+        inputRef.current.value = '';
+      }
 
       // Se va a validar el archivo, solo si este existe
       if (newFile) {
@@ -54,7 +64,7 @@ const DragDropFile = ({
 
         // Evitamos cargar archivos repetidos
         const repeatedFiles = currentFiles.filter(
-          (file) => file.fileData.id === newFile.lastModified
+          (file) => file.fileData.id === `${newFile.lastModified}`
         );
         if (repeatedFiles.length) {
           openModalGlobal({
@@ -68,7 +78,7 @@ const DragDropFile = ({
         const newData: FileList = {
           src: URL.createObjectURL(newFile as any),
           fileData: {
-            id: newFile.lastModified,
+            id: `${newFile.lastModified}`,
             name: newFile.name,
             size: newFile.size,
             type: newFile.type
@@ -126,6 +136,14 @@ const DragDropFile = ({
    */
   const handlePreviewFile = useCallback((id: string): void => {
     setCurrentId(id);
+    setOpenPreview(true);
+  }, []);
+
+  /**
+   * Funcion que se encarga de cerrar la modal de vista previa 'ImagePreview'.
+   */
+  const handleClosePreview = useCallback((): void => {
+    setOpenPreview(false);
   }, []);
 
   /**
@@ -170,6 +188,7 @@ const DragDropFile = ({
             </div>
 
             <input
+              ref={inputRef}
               type="file"
               name="file"
               className="absolute t-0 l-0 w-full h-full opacity-0"
@@ -187,17 +206,17 @@ const DragDropFile = ({
               title={{ value: 'screens.upload.preview_title' }}
               size="medium"
               weight="medium"
-              className="w-4/5 mt-20 mb-8 mx-auto text-center leading-5 sm:leading-7"
+              className="w-4/5 sm:w-3/5 mt-20 mb-8 mx-auto text-center leading-5 sm:leading-7"
               color="gray-light"
             />
 
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center pb-10">
               {files.map((file) => {
                 return (
                   <div
                     key={`${file.fileData.id}`}
                     className="relative flex justify-start w-full max-w-lg py-2 px-4 mb-4 rounded-lg bg-blue-100 hover:cursor-pointer"
-                    onClick={() => handlePreviewFile(`${file.fileData.id}`)}
+                    onClick={() => handlePreviewFile(file.fileData.id)}
                   >
                     <Icon
                       name="image"
@@ -227,7 +246,7 @@ const DragDropFile = ({
                     <button
                       className="absolute top-3 right-3 z-50 w-5 h-5"
                       onClick={(e) =>
-                        handleRemoveFile(e, `${file.fileData.id}`, files)
+                        handleRemoveFile(e, file.fileData.id, files)
                       }
                     >
                       <Icon name="close" className="w-full h-full" />
@@ -240,8 +259,12 @@ const DragDropFile = ({
         )}
 
         {/* Images preview */}
-        {/* TODO: Agregar ImagePreview */}
-        <p>{currentId}</p>
+        <ImagePreview
+          isOpen={openPreview}
+          index={currentId}
+          files={files}
+          onClose={handleClosePreview}
+        />
       </div>
     </>
   );

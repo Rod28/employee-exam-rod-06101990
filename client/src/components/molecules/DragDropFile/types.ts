@@ -1,6 +1,6 @@
 export interface FileData {
   /** Id de archivo */
-  id: number;
+  id: string;
   /** Nombre del archivo */
   name: string;
   /** Peso del archivo */

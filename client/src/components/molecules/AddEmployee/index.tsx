@@ -13,19 +13,12 @@ import { AddEmployeeProps } from './types';
 // Styles
 import './style.scss';
 
-/**
- * Renderiza una modal personalizable que admite uno de los 3 estados, 'successful' o
- * 'warning' o 'error'.
- *
- * Cada uno de los 3 estados contiene un color de icono específico, al abrirse la modal,
- * se desactiva el scroll vertical de la app, y se reativa al cerrar la misma.
- */
 const AddEmployee = ({
   isOpen,
   onCloseModal,
   onContinue
 }: AddEmployeeProps) => {
-  // Stated
+  // States
   const [methods, setMethods] = useState<UseFormReturn>();
 
   // Animaciones para abrir la modal

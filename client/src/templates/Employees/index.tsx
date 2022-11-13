@@ -166,6 +166,7 @@ const Employees = () => {
         const newData = [
           {
             name: { first: values.name, last: values.lastName },
+            login: { salt: moment().unix() },
             picture: {
               large:
                 'https://img.freepik.com/vector-premium/perfil-avatar-hombre-icono-redondo_24640-14044.jpg?w=2000',
